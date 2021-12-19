@@ -1,6 +1,6 @@
-local library = {}
+getgenv().library = {}
 
-function library:CreateWindow(title)
+function getgenv().library:CreateWindow(title)
     local ScreenGui = Instance.new("ScreenGui")
     local MainFrame = Instance.new("Frame")
     local UICorner = Instance.new("UICorner")
@@ -102,9 +102,9 @@ function library:CreateWindow(title)
     end
     coroutine.wrap(PZYWK_fake_script)()
 
-    local Buttons = {}
+    getgenv().Buttons = {}
 
-    function Buttons:CreateButton(title, callback)
+    function getgenv().Buttons:CreateButton(title, callback)
         local callback = callback or function()end
         local Button = Instance.new("TextButton")
         local UICorner = Instance.new("UICorner")
@@ -122,7 +122,7 @@ function library:CreateWindow(title)
         UICorner.CornerRadius = UDim.new(0, 10)
         UICorner.Parent = Button
     end
-    function Buttons:CreateTogle(title, callback)
+    function getgenv().Buttons:CreateTogle(title, callback)
         
         local callback = callback or function()end
         local Togle = Instance.new("TextButton")
@@ -196,7 +196,6 @@ function library:CreateWindow(title)
         coroutine.wrap(NVIQ_fake_script)()
     end
 
-    return Buttons
+    return getgenv().Buttons
 end
-
 
