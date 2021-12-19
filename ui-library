@@ -30,7 +30,7 @@ function getgenv().library:CreateWindow(title)
     MainTitle.Position = UDim2.new(0.0362903215, 0, 0, 0)
     MainTitle.Size = UDim2.new(0, 179, 0, 45)
     MainTitle.Font = Enum.Font.SourceSansLight
-    MainTitle.Text = title
+    MainTitle.Text = title 
     MainTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
     MainTitle.TextSize = 32.000
     MainTitle.TextWrapped = true
