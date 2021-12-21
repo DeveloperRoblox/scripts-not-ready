@@ -1,0 +1,451 @@
+local message = Instance.new("Message", game.CoreGui)
+message.Text = "Give tools - Made by ilxsxmu"
+delay(2.5, function()
+    message:Destroy()
+end)
+
+function SendNotification(title, text, duration)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = title;
+        Text = text;
+        Duration = duration;
+    })
+end
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local MainTitle = Instance.new("TextLabel")
+local Frame_2 = Instance.new("Frame")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local UIGridLayout = Instance.new("UIGridLayout")
+local TextLabel = Instance.new("TextLabel")
+local GiveTools = Instance.new("TextButton")
+local GiveTools2 = Instance.new("TextButton")
+local GiveTools3 = Instance.new("TextButton")
+local NamePlayer = Instance.new("TextBox")
+local ButtonTool = Instance.new("TextButton")
+
+delay(2.5, function()
+    SendNotification("Give tools", "Press Right control to togle gui", 3)
+    SendNotification("Give tools", "Press left shift to run")
+    local Uis = game:GetService("UserInputService")
+    Uis.InputBegan:Connect(function(Input)
+        if Input.KeyCode == Enum.KeyCode.RightControl then
+            Frame.Visible = not Frame.Visible
+        end
+    end)
+    Uis.InputBegan:Connect(function(Input)
+        if Input.KeyCode == Enum.KeyCode.LeftShift then
+            getgenv().OldWalkSpeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
+            spawn(function()
+                getgenv().Run = true
+                while getgenv().Run == true do
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100
+                    wait()
+                end
+            end)
+        end
+    end)
+    Uis.InputEnded:Connect(function(Input)
+        if Input.KeyCode == Enum.KeyCode.LeftShift then
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = getgenv().OldWalkSpeed
+            getgenv().Run = false
+        end
+    end)
+end)
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 121, 25)
+Frame.Position = UDim2.new(0.0312732682, 0, 0.206060603, 0)
+Frame.Size = UDim2.new(0, 489, 0, 227)
+Frame.Active = true
+Frame.Draggable = true
+
+
+
+MainTitle.Name = "MainTitle"
+MainTitle.Parent = Frame
+MainTitle.BackgroundColor3 = Color3.fromRGB(134, 74, 255)
+MainTitle.Size = UDim2.new(0, 489, 0, 26)
+MainTitle.Font = Enum.Font.SourceSans
+MainTitle.Text = "Give tool - Made by ilxsxmu"
+MainTitle.TextColor3 = Color3.fromRGB(0, 0, 0)
+MainTitle.TextScaled = true
+MainTitle.TextSize = 14.000
+MainTitle.TextWrapped = true
+
+Frame_2.Parent = Frame
+Frame_2.BackgroundColor3 = Color3.fromRGB(139, 38, 255)
+Frame_2.Position = UDim2.new(0.582822084, 0, 0.114537448, 0)
+Frame_2.Size = UDim2.new(0, 204, 0, 201)
+
+ScrollingFrame.Parent = Frame_2
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(34, 74, 255)
+ScrollingFrame.Position = UDim2.new(0, 0, 0.218905479, 0)
+ScrollingFrame.Size = UDim2.new(0, 204, 0, 157)
+
+UIGridLayout.Parent = ScrollingFrame
+UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIGridLayout.CellSize = UDim2.new(0, 190, 0, 25)
+
+TextLabel.Parent = Frame_2
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 19, 153)
+TextLabel.Size = UDim2.new(0, 204, 0, 44)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Your tools:"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+GiveTools.Name = "GiveTools"
+GiveTools.Parent = Frame
+GiveTools.BackgroundColor3 = Color3.fromRGB(71, 255, 21)
+GiveTools.Position = UDim2.new(0.0552147254, 0, 0.806167424, 0)
+GiveTools.Size = UDim2.new(0, 237, 0, 24)
+GiveTools.Font = Enum.Font.SourceSans
+GiveTools.Text = "Give tools"
+GiveTools.TextColor3 = Color3.fromRGB(0, 0, 0)
+GiveTools.TextScaled = true
+GiveTools.TextSize = 14.000
+GiveTools.TextWrapped = true
+
+GiveTools2.Name = "GiveTools"
+GiveTools2.Parent = Frame
+GiveTools2.BackgroundColor3 = Color3.fromRGB(71, 255, 21)
+GiveTools2.Position = UDim2.new(0.05662147254, 0, 0.926167424, 0)
+GiveTools2.Size = UDim2.new(0, 237, 0, 24)
+GiveTools2.Font = Enum.Font.SourceSans
+GiveTools2.Text = "Bring"
+GiveTools2.TextColor3 = Color3.fromRGB(0, 0, 0)
+GiveTools2.TextScaled = true
+GiveTools2.TextSize = 14.000
+GiveTools2.TextWrapped = true
+
+GiveTools3.Name = "GiveTools"
+GiveTools3.Parent = Frame
+GiveTools3.BackgroundColor3 = Color3.fromRGB(71, 255, 21)
+GiveTools3.Position = UDim2.new(0.05662147254, 0, 1.04, 0)
+GiveTools3.Size = UDim2.new(0, 237, 0, 24)
+GiveTools3.Font = Enum.Font.SourceSans
+GiveTools3.Text = "Kill"
+GiveTools3.TextColor3 = Color3.fromRGB(0, 0, 0)
+GiveTools3.TextScaled = true
+GiveTools3.TextSize = 14.000
+GiveTools3.TextWrapped = true
+GiveTools3.MouseButton1Down:Connect(function()
+    if not game.Players:FindFirstChild(NamePlayer.Text) then
+        SendNotification("Give tools", NamePlayer.Text .. " is not on the server")
+    else
+        local Player = game.Players:FindFirstChild(NamePlayer.Text)
+        local Character = Player.Character or Player.CharacterAdded:Wait()
+        if Character.HumanoidRootPart then
+            local Now = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            local NowPos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+            delay(0.8, function()
+                game.Players.LocalPlayer.Character.Humanoid.Name = 1
+                local l = game.Players.LocalPlayer.Character["1"]:Clone()
+                game.Players.LocalPlayer.Character.Animate.Disabled = true
+                game:GetService("Workspace").CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+                if game.Players.LocalPlayer.Character["1"] then
+                    l.Parent = game.Players.LocalPlayer.Character
+                    l.Name = "Humanoid"
+                    wait()
+                    game.Players.LocalPlayer.Character["1"]:Destroy()
+                end
+            end)
+            for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                if v:IsA("Tool") then
+                    v.Parent = game.Players.LocalPlayer.Backpack
+                    delay(1.5, function()
+                        v.Parent = game.Players.LocalPlayer.Character
+                    end)
+                    
+                    repeat
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+                        wait()
+                    until v.Parent == Character
+                    for i = 1,20 do
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 99999, 99999)
+                        wait()
+                    end
+                    game.Players.LocalPlayer.CharacterAdded:Wait()
+                    spawn(function()
+                        _G.Loop = true
+                        while _G.Loop == true do
+                            game.Players.LocalPlayer.Character:MoveTo(NowPos)
+                            wait()
+                        end
+                    end)
+                    delay(3, function()
+                        _G.Loop = false
+                    end )
+                    SendNotification("Bring gui", "Sucess kill " .. NamePlayer.Text, 1)
+                end
+            end
+        end
+    end
+end)
+
+GiveTools2.MouseButton1Down:Connect(function()
+    local lPlayer = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local Now = lPlayer.CFrame
+    if not game.Players:FindFirstChild(NamePlayer.Text) then
+        SendNotification("Give tools", NamePlayer.Text .. " is not on the server")
+    else
+        if game.Players[NamePlayer.Text].Character.Humanoid.Sit == true then
+            SendNotification("Error", "Player is seat", 1)
+        else
+            local Player = game.Players:FindFirstChild(NamePlayer.Text)
+            local Character = Player.Character or Player.CharacterAdded:Wait()
+            if Character.HumanoidRootPart then
+                
+                local NowPos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                
+                delay(0.8, function()
+                    game.Players.LocalPlayer.Character.Humanoid.Name = 1
+                    local l = game.Players.LocalPlayer.Character["1"]:Clone()
+                    game.Players.LocalPlayer.Character.Animate.Disabled = true
+                    game:GetService("Workspace").CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+                    if game.Players.LocalPlayer.Character["1"] then
+                        l.Parent = game.Players.LocalPlayer.Character
+                        l.Name = "Humanoid"
+                        wait()
+                        game.Players.LocalPlayer.Character["1"]:Destroy()
+                    end
+                end)
+                delay(3, function()
+                    message:Destroy()
+                end)
+                for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                    if v:IsA("Tool") then
+                        v.Parent = game.Players.LocalPlayer.Backpack
+                        delay(1.5, function()
+                            v.Parent = game.Players.LocalPlayer.Character
+                        end)
+                        
+                        repeat
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+                            wait()
+                        until v.Parent == Character
+                        local message = Instance.new("Message", game.CoreGui)
+                        message.Text = "Press LeftControl to teleport to old position of you character"
+                        game:GetService("UserInputService").InputBegan:Connect(function(input)
+                            if input.KeyCode == Enum.KeyCode.LeftControl then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Now)
+                                if message then
+                                    message:Destroy()
+                                end
+                            end
+                        end)
+                        delay(2, function()
+                            message:Destroy()
+                        end)
+                        for i = 1,20 do
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Now
+                            wait()
+                        end
+                        spawn(function()
+                            _G.Loop = true
+                            while _G.Loop == true do
+                                game.Players.LocalPlayer.Character:MoveTo(NowPos)
+                                wait()
+                            end
+                        end)
+                        delay(3, function()
+                            _G.Loop = false
+                        end )
+                        SendNotification("Bring gui", "Sucess bring " .. NamePlayer.Text, 1)
+                    end
+                end
+            end
+        end
+    end
+end)
+
+GiveTools.MouseButton1Down:Connect(function()
+    if not game.Players:FindFirstChild(NamePlayer.Text) then
+        SendNotification("Give tools", NamePlayer.Text .. " is not on the server")
+    else
+        local Player = game.Players:FindFirstChild(NamePlayer.Text)
+        local Character = Player.Character or Player.CharacterAdded:Wait()
+        if Character.HumanoidRootPart then
+            local Now = Character.HumanoidRootPart.CFrame
+            delay(0.8, function()
+                game.Players.LocalPlayer.Character.Humanoid.Name = 1
+                local l = game.Players.LocalPlayer.Character["1"]:Clone()
+                game.Players.LocalPlayer.Character.Animate.Disabled = true
+                game:GetService("Workspace").CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+                if game.Players.LocalPlayer.Character["1"] then
+                    l.Parent = game.Players.LocalPlayer.Character
+                    l.Name = "Humanoid"
+                    wait()
+                    game.Players.LocalPlayer.Character["1"]:Destroy()
+                end
+            end)
+            for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                if v:IsA("Tool") then
+                    v.Parent = game.Players.LocalPlayer.Backpack
+                    delay(1.5, function()
+                        v.Parent = game.Players.LocalPlayer.Character
+                    end)
+                    
+                    repeat
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame
+                        wait()
+                    until v.Parent == Character
+                    for i = 1,20 do
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Now
+                        wait()
+                    end
+                end
+            end
+        end
+    end
+end)
+
+NamePlayer.Name = "NamePlayer"
+NamePlayer.Parent = Frame
+NamePlayer.BackgroundColor3 = Color3.fromRGB(127, 53, 255)
+NamePlayer.Position = UDim2.new(0.0388548039, 0, 0.276008129, 0)
+NamePlayer.Size = UDim2.new(0, 253, 0, 76)
+NamePlayer.Font = Enum.Font.SourceSans
+NamePlayer.Text = "Name player"
+NamePlayer.TextColor3 = Color3.fromRGB(0, 0, 0)
+NamePlayer.TextSize = 50.000
+
+ButtonTool.Name = "ButtonTool"
+ButtonTool.Parent = Frame
+ButtonTool.BackgroundColor3 = Color3.fromRGB(99, 37, 255)
+ButtonTool.Size = UDim2.new(0, 200, 0, 50)
+ButtonTool.Visible = false
+ButtonTool.Font = Enum.Font.SourceSans
+ButtonTool.TextColor3 = Color3.fromRGB(0, 0, 0)
+ButtonTool.TextScaled = true
+ButtonTool.TextSize = 14.000
+ButtonTool.TextWrapped = true
+
+
+-- Scripts:
+
+local function ELBVMS_fake_script() -- ScrollingFrame.LocalScript 
+	local script = Instance.new('LocalScript', ScrollingFrame)
+
+	while true do
+		for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+			if v then
+				local w = script.Parent.Parent.Parent.ButtonTool:Clone()
+				w.Parent = script.Parent.Parent.ScrollingFrame
+				w.Text = v.Name
+				w.Visible = true
+				w.MouseButton1Down:Connect(function()
+					v.Parent = game.Players.LocalPlayer.Character
+				end)
+				delay(0.3, function()
+					w:Destroy()
+				end)
+			end
+		end
+		wait(0.3)
+	end
+end
+coroutine.wrap(ELBVMS_fake_script)()
+
+pcall(function()
+    local function callback(text)
+        if text == "Yes" then
+            spawn(function()
+                local message = Instance.new("Message", game.CoreGui)
+                message.Text = "Fast nick gui is loaded - Made by ilxsxmu"
+                game.Workspace.CurrentCamera.CFrame = CFrame.new()
+                delay(2, function()
+                    message:Destroy()
+                end)
+                wait()
+                local ScreenGui = Instance.new("ScreenGui")
+                local Frame_Um = Instance.new("Frame")
+                local Titulo = Instance.new("TextLabel")
+                local Frame_Dois = Instance.new("Frame")
+                local UIGridLayout = Instance.new("UIGridLayout")
+                local BotaoPlayer = Instance.new("TextButton")
+                
+                
+                ScreenGui.Parent = game.CoreGui
+                ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+                
+                Frame_Um.Name = "Frame_Um"
+                Frame_Um.Parent = ScreenGui
+                Frame_Um.BackgroundColor3 = Color3.fromRGB(23, 58, 255)
+                Frame_Um.Position = UDim2.new(0.699925542, 0, 0.26303032, 0)
+                Frame_Um.Size = UDim2.new(0, 293, 0, 445)
+                Frame_Um.Active = true
+                Frame_Um.Draggable = true
+                
+                Titulo.Name = "Titulo"
+                Titulo.Parent = Frame_Um
+                Titulo.BackgroundColor3 = Color3.fromRGB(27, 20, 255)
+                Titulo.Size = UDim2.new(0, 293, 0, 53)
+                Titulo.Font = Enum.Font.SourceSans
+                Titulo.Text = "fast nicks - Made by ilxsxmu"
+                Titulo.TextColor3 = Color3.fromRGB(0, 0, 0)
+                Titulo.TextSize = 29.000
+                Titulo.TextWrapped = true
+                
+                Frame_Dois.Name = "Frame_Dois"
+                Frame_Dois.Parent = Frame_Um
+                Frame_Dois.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                Frame_Dois.BackgroundTransparency = 1.000
+                Frame_Dois.Position = UDim2.new(0, 0, 0.141573027, 0)
+                Frame_Dois.Size = UDim2.new(0, 293, 0, 382)
+                
+                UIGridLayout.Parent = Frame_Dois
+                UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+                UIGridLayout.CellSize = UDim2.new(0, 290, 0, 30)
+                
+                BotaoPlayer.Name = "BotaoPlayer"
+                BotaoPlayer.Parent = Frame_Um
+                BotaoPlayer.BackgroundColor3 = Color3.fromRGB(0, 4, 255)
+                BotaoPlayer.Size = UDim2.new(0, 200, 0, 50)
+                BotaoPlayer.Visible = false
+                BotaoPlayer.Font = Enum.Font.SourceSans
+                BotaoPlayer.TextColor3 = Color3.fromRGB(0, 0, 0)
+                BotaoPlayer.TextSize = 14.000
+                
+                while true do
+                for i,v in pairs(game.Players:GetChildren()) do
+                    if v then
+                        local w = BotaoPlayer:Clone()
+                        w.Parent = Frame_Dois
+                        w.Text = v.Name
+                        w.TextScaled = true
+                        w.Visible = true
+                        delay(0.3, function()
+                            w:Destroy()
+                        end)
+                        w.MouseButton1Down:Connect(function()
+                            NamePlayer.Text = v.Name
+                        end)
+                    end
+                end
+                wait(0.3)
+                end
+            end)
+        end
+    end
+
+    local BindableFunction = Instance.new("BindableFunction")
+    BindableFunction.OnInvoke = callback
+
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Bring gui";
+        Text = "Need gui Fast nick?";
+        Button1 = "Yes";
+        Button2 = "No";
+        Callback = BindableFunction;
+        Duration = 99999999999;
+    })
+end)
